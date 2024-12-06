@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Zach Culp">
+
+<title>STAT 408 Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Final_Project_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Final_Project_files/libs/quarto-html/quarto.js"></script>
+<script src="Final_Project_files/libs/quarto-html/popper.min.js"></script>
+<script src="Final_Project_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Final_Project_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Final_Project_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Final_Project_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Final_Project_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Final_Project_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Final_Project_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">STAT 408 Project</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Zach Culp </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="data-exploration-and-preparation" class="level1">
+<h1>Data Exploration and Preparation</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyverse' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tibble' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'tidyr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'readr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'forcats' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.0
+✔ ggplot2   3.5.0     ✔ tibble    3.2.1
+✔ lubridate 1.9.2     ✔ tidyr     1.3.1
+✔ purrr     1.0.1     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>bets <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Data/spreadspoke_scores.csv"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter and select necessary columns</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>bets <span class="ot">&lt;-</span> bets <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(spread_favorite) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(over_under_line) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(weather_temperature) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(weather_wind_mph)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>         <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(weather_humidity))<span class="sc">%&gt;%</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(spread_favorite)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(score_home, score_away, spread_favorite, over_under_line, weather_temperature, weather_wind_mph, weather_humidity, weather_detail, stadium_neutral, schedule_week, schedule_season, schedule_playoff)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust `spread_favorite` to always match the home team</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>bets <span class="ot">&lt;-</span> bets <span class="sc">%&gt;%</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total_score =</span> score_home <span class="sc">+</span> score_away)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#mutate(spread_favorite = -spread_favorite)</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>total_score_reg <span class="ot">&lt;-</span> bets <span class="sc">%&gt;%</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_score, over_under_line, spread_favorite, weather_temperature, weather_wind_mph, weather_humidity, stadium_neutral, schedule_week, schedule_season, schedule_playoff, weather_detail)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>over_under <span class="ot">&lt;-</span> bets <span class="sc">%&gt;%</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(total_score, over_under_line, spread_favorite, weather_temperature, weather_wind_mph, weather_humidity, stadium_neutral, schedule_week, schedule_season, schedule_playoff, weather_detail) <span class="sc">%&gt;%</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">over=</span><span class="fu">ifelse</span>(total_score<span class="sc">&gt;</span>over_under_line, <span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bets, <span class="fu">aes</span>(<span class="at">x=</span>spread_favorite,<span class="at">y=</span>total_score)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bets, <span class="fu">aes</span>(<span class="at">x=</span>weather_temperature,<span class="at">y=</span>total_score)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bets, <span class="fu">aes</span>(<span class="at">x=</span>weather_wind_mph,<span class="at">y=</span>total_score)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bets, <span class="fu">aes</span>(<span class="at">x=</span>weather_humidity,<span class="at">y=</span>total_score)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bets, <span class="fu">aes</span>(<span class="at">x=</span>schedule_week,<span class="at">y=</span>total_score)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-1-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bets, <span class="fu">aes</span>(<span class="at">x=</span>schedule_season,<span class="at">y=</span>total_score)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-1-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>bets, <span class="fu">aes</span>(<span class="at">x=</span>weather_detail,<span class="at">y=</span>total_score)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-1-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="total-score-model-building" class="level1">
+<h1>Total Score Model Building</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: zoo</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'zoo'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    as.Date, as.Date.numeric</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(regclass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'regclass' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: bestglm</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'bestglm' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: leaps</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: VGAM</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'VGAM' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: stats4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: splines</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'VGAM'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:lmtest':
+
+    lrtest</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: rpart</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: randomForest</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>randomForest 4.7-1.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Type rfNews() to see new features/changes/bug fixes.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'randomForest'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    combine</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    margin</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Important regclass change from 1.3:
+All functions that had a . in the name now have an _
+all.correlations -&gt; all_correlations, cor.demo -&gt; cor_demo, etc.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_score <span class="sc">~</span> .<span class="sc">*</span>., total_score_reg) <span class="co"># none of the quadratic variables are significant or have mulitcolinearity</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>mod_best <span class="ot">&lt;-</span> <span class="fu">step</span>(mod,<span class="at">direction =</span> <span class="st">"backward"</span>,<span class="at">trace=</span><span class="dv">0</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>mod_best</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = total_score ~ over_under_line + spread_favorite + 
+    weather_temperature + weather_wind_mph + weather_humidity + 
+    schedule_season + weather_detail + spread_favorite:weather_temperature + 
+    weather_temperature:weather_wind_mph + weather_temperature:weather_humidity + 
+    weather_temperature:schedule_season + schedule_season:weather_detail, 
+    data = total_score_reg)
+
+Coefficients:
+                                          (Intercept)  
+                                           -2.174e+02  
+                                      over_under_line  
+                                            8.087e-01  
+                                      spread_favorite  
+                                            2.993e-01  
+                                  weather_temperature  
+                                            3.908e+00  
+                                     weather_wind_mph  
+                                           -4.447e-01  
+                                     weather_humidity  
+                                            5.689e-02  
+                                      schedule_season  
+                                            1.149e-01  
+                                    weather_detailfog  
+                                            8.138e+03  
+                                   weather_detailrain  
+                                           -1.392e+02  
+                             weather_detailrain | fog  
+                                            1.265e+04  
+                weather_detailretractable (open roof)  
+                                           -4.488e+03  
+                                   weather_detailsnow  
+                                            2.100e+03  
+                             weather_detailsnow | fog  
+                                           -3.138e+04  
+                   weather_detailsnow | Freezing rain  
+                                            1.070e+01  
+                  spread_favorite:weather_temperature  
+                                           -6.522e-03  
+                 weather_temperature:weather_wind_mph  
+                                            4.054e-03  
+                 weather_temperature:weather_humidity  
+                                           -1.068e-03  
+                  weather_temperature:schedule_season  
+                                           -1.970e-03  
+                    schedule_season:weather_detailfog  
+                                           -4.046e+00  
+                   schedule_season:weather_detailrain  
+                                            6.924e-02  
+             schedule_season:weather_detailrain | fog  
+                                           -6.292e+00  
+schedule_season:weather_detailretractable (open roof)  
+                                            2.231e+00  
+                   schedule_season:weather_detailsnow  
+                                           -1.043e+00  
+             schedule_season:weather_detailsnow | fog  
+                                            1.559e+01  
+   schedule_season:weather_detailsnow | Freezing rain  
+                                                   NA  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>new_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_score <span class="sc">~</span> over_under_line <span class="sc">+</span> spread_favorite <span class="sc">+</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    weather_temperature <span class="sc">+</span> weather_wind_mph <span class="sc">+</span> weather_humidity <span class="sc">+</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    schedule_season <span class="sc">+</span> weather_detail <span class="sc">+</span> spread_favorite<span class="sc">:</span>weather_temperature <span class="sc">+</span> </span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    weather_temperature<span class="sc">:</span>weather_wind_mph <span class="sc">+</span> weather_temperature<span class="sc">:</span>weather_humidity <span class="sc">+</span> </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    weather_temperature<span class="sc">:</span>schedule_season <span class="sc">+</span> schedule_season<span class="sc">:</span>weather_detail, </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> total_score_reg)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="fu">alias</span>(new_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model :
+total_score ~ over_under_line + spread_favorite + weather_temperature + 
+    weather_wind_mph + weather_humidity + schedule_season + weather_detail + 
+    spread_favorite:weather_temperature + weather_temperature:weather_wind_mph + 
+    weather_temperature:weather_humidity + weather_temperature:schedule_season + 
+    schedule_season:weather_detail
+
+Complete :
+                                                   (Intercept) over_under_line
+schedule_season:weather_detailsnow | Freezing rain    0           0           
+                                                   spread_favorite
+schedule_season:weather_detailsnow | Freezing rain    0           
+                                                   weather_temperature
+schedule_season:weather_detailsnow | Freezing rain    0               
+                                                   weather_wind_mph
+schedule_season:weather_detailsnow | Freezing rain    0            
+                                                   weather_humidity
+schedule_season:weather_detailsnow | Freezing rain    0            
+                                                   schedule_season
+schedule_season:weather_detailsnow | Freezing rain    0           
+                                                   weather_detailfog
+schedule_season:weather_detailsnow | Freezing rain    0             
+                                                   weather_detailrain
+schedule_season:weather_detailsnow | Freezing rain    0              
+                                                   weather_detailrain | fog
+schedule_season:weather_detailsnow | Freezing rain    0                    
+                                                   weather_detailretractable (open roof)
+schedule_season:weather_detailsnow | Freezing rain    0                                 
+                                                   weather_detailsnow
+schedule_season:weather_detailsnow | Freezing rain    0              
+                                                   weather_detailsnow | fog
+schedule_season:weather_detailsnow | Freezing rain    0                    
+                                                   weather_detailsnow | Freezing rain
+schedule_season:weather_detailsnow | Freezing rain 2013                              
+                                                   spread_favorite:weather_temperature
+schedule_season:weather_detailsnow | Freezing rain    0                               
+                                                   weather_temperature:weather_wind_mph
+schedule_season:weather_detailsnow | Freezing rain    0                                
+                                                   weather_temperature:weather_humidity
+schedule_season:weather_detailsnow | Freezing rain    0                                
+                                                   weather_temperature:schedule_season
+schedule_season:weather_detailsnow | Freezing rain    0                               
+                                                   schedule_season:weather_detailfog
+schedule_season:weather_detailsnow | Freezing rain    0                             
+                                                   schedule_season:weather_detailrain
+schedule_season:weather_detailsnow | Freezing rain    0                              
+                                                   schedule_season:weather_detailrain | fog
+schedule_season:weather_detailsnow | Freezing rain    0                                    
+                                                   schedule_season:weather_detailretractable (open roof)
+schedule_season:weather_detailsnow | Freezing rain    0                                                 
+                                                   schedule_season:weather_detailsnow
+schedule_season:weather_detailsnow | Freezing rain    0                              
+                                                   schedule_season:weather_detailsnow | fog
+schedule_season:weather_detailsnow | Freezing rain    0                                    </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(new_mod,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(new_mod,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: not plotting observations with leverage one:
+  410, 4089, 4384</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(new_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  new_mod
+BP = 42.735, df = 23, p-value = 0.007444</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">rstandard</span>(new_mod),<span class="st">"pnorm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Asymptotic one-sample Kolmogorov-Smirnov test
+
+data:  rstandard(new_mod)
+D = 0.030447, p-value = 1.475e-05
+alternative hypothesis: two-sided</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Violates both normality and homoscedasticity.</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Built the VIF_mod by removing all variables one by one until the VIF showed no colinearity from new_mod</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>VIF_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(total_score <span class="sc">~</span> over_under_line <span class="sc">+</span> spread_favorite <span class="sc">+</span> </span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    weather_temperature <span class="sc">+</span> weather_wind_mph <span class="sc">+</span> weather_humidity <span class="sc">+</span> </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    schedule_season <span class="sc">+</span> weather_detail <span class="sc">+</span> spread_favorite<span class="sc">:</span>weather_temperature <span class="sc">+</span> </span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    weather_temperature<span class="sc">:</span>weather_wind_mph, </span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> total_score_reg)</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="fu">VIF</span>(VIF_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                          GVIF Df GVIF^(1/(2*Df))
+over_under_line                       1.051286  1        1.025322
+spread_favorite                      13.713609  1        3.703189
+weather_temperature                   8.654576  1        2.941866
+weather_wind_mph                     12.584935  1        3.547525
+weather_humidity                      1.036850  1        1.018258
+schedule_season                       1.121367  1        1.058946
+weather_detail                        1.072152  7        1.004989
+spread_favorite:weather_temperature  15.544834  1        3.942694
+weather_temperature:weather_wind_mph 14.956024  1        3.867302</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(VIF_mod,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(VIF_mod,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: not plotting observations with leverage one:
+  4089</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(VIF_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  VIF_mod
+BP = 34.792, df = 15, p-value = 0.002633</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">rstandard</span>(VIF_mod),<span class="st">"pnorm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Asymptotic one-sample Kolmogorov-Smirnov test
+
+data:  rstandard(VIF_mod)
+D = 0.030481, p-value = 1.431e-05
+alternative hypothesis: two-sided</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>sq_VIFmod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(total_score) <span class="sc">~</span>  over_under_line <span class="sc">+</span> spread_favorite <span class="sc">+</span> </span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>    weather_temperature <span class="sc">+</span> weather_wind_mph <span class="sc">+</span> weather_humidity <span class="sc">+</span> </span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    schedule_season <span class="sc">+</span> weather_detail <span class="sc">+</span> spread_favorite<span class="sc">:</span>weather_temperature <span class="sc">+</span> </span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>    weather_temperature<span class="sc">:</span>weather_wind_mph, </span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> total_score_reg)</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="fu">VIF</span>(sq_VIFmod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                          GVIF Df GVIF^(1/(2*Df))
+over_under_line                       1.051286  1        1.025322
+spread_favorite                      13.713609  1        3.703189
+weather_temperature                   8.654576  1        2.941866
+weather_wind_mph                     12.584935  1        3.547525
+weather_humidity                      1.036850  1        1.018258
+schedule_season                       1.121367  1        1.058946
+weather_detail                        1.072152  7        1.004989
+spread_favorite:weather_temperature  15.544834  1        3.942694
+weather_temperature:weather_wind_mph 14.956024  1        3.867302</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sq_VIFmod,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sq_VIFmod,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: not plotting observations with leverage one:
+  4089</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(sq_VIFmod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  sq_VIFmod
+BP = 33.382, df = 15, p-value = 0.004155</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">rstandard</span>(sq_VIFmod),<span class="st">"pnorm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Asymptotic one-sample Kolmogorov-Smirnov test
+
+data:  rstandard(sq_VIFmod)
+D = 0.0116, p-value = 0.3575
+alternative hypothesis: two-sided</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># violates homoscedasticity</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>mod_inter <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">abs</span>(total_score) <span class="sc">~</span> over_under_line <span class="sc">+</span> spread_favorite <span class="sc">+</span> </span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>    weather_temperature <span class="sc">+</span> weather_wind_mph <span class="sc">+</span> weather_humidity <span class="sc">+</span> </span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>    schedule_season <span class="sc">+</span> weather_detail <span class="sc">+</span> spread_favorite<span class="sc">:</span>weather_temperature <span class="sc">+</span> </span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>    weather_temperature<span class="sc">:</span>weather_wind_mph, </span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> total_score_reg)</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate the weights from mod_inter as w = 1/hat(y)^2</span></span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="fu">fitted.values</span>(mod_inter))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform weighted least squares regression using the option inputs "weights"</span></span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a>mod_weight <span class="ot">&lt;-</span> <span class="fu">lm</span>( total_score <span class="sc">~</span> over_under_line <span class="sc">+</span> spread_favorite <span class="sc">+</span> </span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a>    weather_temperature <span class="sc">+</span> weather_wind_mph <span class="sc">+</span> weather_humidity <span class="sc">+</span> </span>
+<span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a>    schedule_season <span class="sc">+</span> weather_detail <span class="sc">+</span> spread_favorite<span class="sc">:</span>weather_temperature <span class="sc">+</span> </span>
+<span id="cb69-15"><a href="#cb69-15" aria-hidden="true" tabindex="-1"></a>    weather_temperature<span class="sc">:</span>weather_wind_mph, </span>
+<span id="cb69-16"><a href="#cb69-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> total_score_reg, <span class="at">weights=</span>w)</span>
+<span id="cb69-17"><a href="#cb69-17" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_weight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = total_score ~ over_under_line + spread_favorite + 
+    weather_temperature + weather_wind_mph + weather_humidity + 
+    schedule_season + weather_detail + spread_favorite:weather_temperature + 
+    weather_temperature:weather_wind_mph, data = total_score_reg, 
+    weights = w)
+
+Weighted Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.93065 -0.23593 -0.02336  0.21727  1.78727 
+
+Coefficients:
+                                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                            5.257435  35.352941   0.149 0.881785    
+over_under_line                        0.791967   0.042644  18.572  &lt; 2e-16 ***
+spread_favorite                        0.229655   0.181760   1.264 0.206455    
+weather_temperature                   -0.100654   0.031888  -3.156 0.001604 ** 
+weather_wind_mph                      -0.499056   0.129224  -3.862 0.000114 ***
+weather_humidity                      -0.006137   0.010983  -0.559 0.576346    
+schedule_season                        0.005958   0.017748   0.336 0.737114    
+weather_detailfog                      0.750163   3.707820   0.202 0.839674    
+weather_detailrain                    -0.217575   2.183039  -0.100 0.920613    
+weather_detailrain | fog              -1.660005   2.878573  -0.577 0.564179    
+weather_detailretractable (open roof)  5.177522   5.667640   0.914 0.361002    
+weather_detailsnow                     3.006941   4.949799   0.607 0.543549    
+weather_detailsnow | fog              10.716324   9.707521   1.104 0.269670    
+weather_detailsnow | Freezing rain    11.305236  18.501968   0.611 0.541202    
+spread_favorite:weather_temperature   -0.005380   0.003245  -1.658 0.097423 .  
+weather_temperature:weather_wind_mph   0.004834   0.002396   2.018 0.043653 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3363 on 6361 degrees of freedom
+Multiple R-squared:  0.0675,    Adjusted R-squared:  0.0653 
+F-statistic:  30.7 on 15 and 6361 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_weight,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_weight,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: not plotting observations with leverage one:
+  4089</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(mod_weight)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  mod_weight
+BP = 1.2045, df = 15, p-value = 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">rstandard</span>(mod_weight),<span class="st">"pnorm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Asymptotic one-sample Kolmogorov-Smirnov test
+
+data:  rstandard(mod_weight)
+D = 0.030695, p-value = 1.211e-05
+alternative hypothesis: two-sided</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># violates normality only</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate new weights based on the fitted values of mod_sq</span></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>w_sq <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span>(<span class="fu">fitted.values</span>(sq_VIFmod))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform weighted least squares regression using the new weights</span></span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a>mod_sq_weights <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">sqrt</span>(total_score) <span class="sc">~</span> over_under_line <span class="sc">+</span> spread_favorite <span class="sc">+</span> </span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a>    weather_temperature <span class="sc">+</span> weather_wind_mph <span class="sc">+</span> weather_humidity <span class="sc">+</span> </span>
+<span id="cb78-10"><a href="#cb78-10" aria-hidden="true" tabindex="-1"></a>    schedule_season <span class="sc">+</span> weather_detail <span class="sc">+</span> spread_favorite<span class="sc">:</span>weather_temperature <span class="sc">+</span> </span>
+<span id="cb78-11"><a href="#cb78-11" aria-hidden="true" tabindex="-1"></a>    weather_temperature<span class="sc">:</span>weather_wind_mph, </span>
+<span id="cb78-12"><a href="#cb78-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> total_score_reg, <span class="at">weights =</span> w_sq)</span>
+<span id="cb78-13"><a href="#cb78-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_sq_weights,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-9.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_sq_weights,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: not plotting observations with leverage one:
+  4089</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-10.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(mod_sq_weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    studentized Breusch-Pagan test
+
+data:  mod_sq_weights
+BP = 51.193, df = 15, p-value = 7.676e-06</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(<span class="fu">rstandard</span>(mod_sq_weights),<span class="st">"pnorm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Asymptotic one-sample Kolmogorov-Smirnov test
+
+data:  rstandard(mod_sq_weights)
+D = 0.011217, p-value = 0.3987
+alternative hypothesis: two-sided</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># violates homoscedasticity</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaps)</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>var_sel <span class="ot">&lt;-</span> <span class="fu">regsubsets</span>(total_score <span class="sc">~</span> over_under_line <span class="sc">+</span> spread_favorite <span class="sc">+</span> </span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    weather_temperature <span class="sc">+</span> weather_wind_mph <span class="sc">+</span> weather_humidity <span class="sc">+</span> </span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>    schedule_season <span class="sc">+</span> weather_detail <span class="sc">+</span> spread_favorite<span class="sc">:</span>weather_temperature <span class="sc">+</span> </span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>    weather_temperature<span class="sc">:</span>weather_wind_mph, <span class="at">data=</span>total_score_reg, <span class="at">method=</span><span class="st">"seqrep"</span>, <span class="at">nvmax=</span><span class="dv">100</span>,<span class="at">really.big =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(var_sel)<span class="sc">$</span>cp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 40.593760  8.578066  6.286882  4.186540  3.934771 10.977995  3.651755
+ [8]  4.272227  5.510433  6.827453  8.542566 10.354724 12.192616 17.931433
+[15] 16.000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which.max</span>(<span class="fu">summary</span>(var_sel)<span class="sc">$</span>adjr2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(var_sel,<span class="dv">8</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          (Intercept)                       over_under_line 
+                         16.065591702                           0.812020124 
+                      spread_favorite                   weather_temperature 
+                          0.271087108                          -0.103118384 
+                     weather_wind_mph weather_detailretractable (open roof) 
+                         -0.492294068                           5.423023780 
+             weather_detailsnow | fog   spread_favorite:weather_temperature 
+                          9.598226656                          -0.005960688 
+ weather_temperature:weather_wind_mph 
+                          0.004806916 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>poisson_mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(total_score <span class="sc">~</span> over_under_line <span class="sc">+</span> spread_favorite <span class="sc">+</span> </span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>    weather_temperature <span class="sc">+</span> weather_wind_mph <span class="sc">+</span> weather_detail <span class="sc">+</span> </span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>      spread_favorite<span class="sc">:</span>weather_temperature <span class="sc">+</span> weather_temperature<span class="sc">:</span>weather_wind_mph,</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>total_score_reg, <span class="at">family =</span> poisson)</span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(poisson_mod,<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-11.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(poisson_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = total_score ~ over_under_line + spread_favorite + 
+    weather_temperature + weather_wind_mph + weather_detail + 
+    spread_favorite:weather_temperature + weather_temperature:weather_wind_mph, 
+    family = poisson, data = total_score_reg)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-7.7192  -1.5829  -0.1515   1.3532   9.0319  
+
+Coefficients:
+                                        Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)                            3.128e+00  2.876e-02 108.757  &lt; 2e-16
+over_under_line                        1.918e-02  4.531e-04  42.338  &lt; 2e-16
+spread_favorite                        6.661e-03  2.069e-03   3.220  0.00128
+weather_temperature                   -2.533e-03  3.655e-04  -6.930 4.22e-12
+weather_wind_mph                      -1.242e-02  1.558e-03  -7.975 1.53e-15
+weather_detailfog                      2.839e-02  3.463e-02   0.820  0.41235
+weather_detailrain                    -4.736e-03  2.314e-02  -0.205  0.83787
+weather_detailrain | fog              -6.328e-02  3.490e-02  -1.813  0.06978
+weather_detailretractable (open roof)  1.098e-01  4.694e-02   2.340  0.01930
+weather_detailsnow                     4.460e-02  4.985e-02   0.895  0.37088
+weather_detailsnow | fog               1.710e-01  6.596e-02   2.593  0.00953
+weather_detailsnow | Freezing rain     2.362e-01  1.349e-01   1.750  0.08004
+spread_favorite:weather_temperature   -1.460e-04  3.669e-05  -3.980 6.89e-05
+weather_temperature:weather_wind_mph   1.247e-04  2.842e-05   4.386 1.15e-05
+                                         
+(Intercept)                           ***
+over_under_line                       ***
+spread_favorite                       ** 
+weather_temperature                   ***
+weather_wind_mph                      ***
+weather_detailfog                        
+weather_detailrain                       
+weather_detailrain | fog              .  
+weather_detailretractable (open roof) *  
+weather_detailsnow                       
+weather_detailsnow | fog              ** 
+weather_detailsnow | Freezing rain    .  
+spread_favorite:weather_temperature   ***
+weather_temperature:weather_wind_mph  ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 32056  on 6376  degrees of freedom
+Residual deviance: 29819  on 6363  degrees of freedom
+AIC: 64923
+
+Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(poisson_mod,<span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Final_Project_files/figure-html/unnamed-chunk-2-12.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
